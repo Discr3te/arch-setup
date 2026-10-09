@@ -11,8 +11,11 @@ install_apps() {
     "mako"              # notification daemon
     "nautilus"          # file manager
     "fuzzel"            # application launcher
-    "dosfstools"        # dependency: fuzzel
-    "gimp"              # drawing tool
+    "cryptsetup "       # dependency: fuzzel (LUKS)
+    "dosfstools"        # dependency: fuzzel (format FAT)
+    "ntfs-3g"           # dependency: fuzzel (format ntfs)
+    "ntfsprogs"         # dependency: fuzzel (format ntfs)
+    "gimp"              # photo editing software
     "libreoffice-still" # office suite
     "freecad"           # cad software
     "discord"

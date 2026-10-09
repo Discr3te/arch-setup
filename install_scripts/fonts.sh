@@ -7,7 +7,6 @@ install_fonts() {
     "otf-font-awesome"
     "noto-fonts-cjk"
     "noto-fonts-emoji"
-    "terminus-font"
   )
 
   install_pkg "${fonts[@]}"
