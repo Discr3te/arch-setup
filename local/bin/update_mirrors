@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+country=US
+protocol=https
+
+sudo pacman -S --noconfirm --needed pacman-contrib
+
+mirrorlist=/etc/pacman.d/mirrorlist
+new_mirrorlist=/etc/pacman.d/mirrorlist.new
+backup_mirrorlist=/etc/pacman.d/mirrorlist.bk
+
+if [ -f "$backup_mirrorlist" ]; then
+  sudo rm -rf $backup_mirrorlist
+fi
+
+if [ -f "$mirrorlist" ]; then
+  sudo mv $mirrorlist $backup_mirrorlist
+fi
+
+echo "Downloading new mirrorlist"
+mirrorlist_url="https://archlinux.org/mirrorlist/?country=$country&protocol=$protocol&use_mirror_status=on"
+sudo curl -o $new_mirrorlist "$mirrorlist_url"
+sudo sed -i 's/^# *Server/Server/' $new_mirrorlist
+
+echo "Ranking mirrorlist, this will take a few minutes..."
+sudo rankmirrors -n 5 $new_mirrorlist | sudo tee $mirrorlist >/dev/null
+
+echo "Finished ranking mirrorlist."
+sudo rm -rf $new_mirrorlist
