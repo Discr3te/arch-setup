@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-source "$SCRIPT_DIR/lib/utils.sh"
-
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 CONFIG_DIR="$HOME/.config"
 LOCAL_DIR="$HOME/.local"
 DOTFILES_DIR="$HOME/.dotfiles"
 DOWNLOADS_DIR="$HOME/Downloads"
+
+source "$SCRIPT_DIR/lib/utils.sh"
 
 git clone https://github.com/Discr3te/.dotfiles.git "$DOTFILES_DIR"
 

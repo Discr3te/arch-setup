@@ -3,4 +3,3 @@
 install_pkg bluez bluez-tools bluez-utils bluetui
 
 sudo systemctl enable bluetooth.service
-sudo systemctl start bluetooth.service
