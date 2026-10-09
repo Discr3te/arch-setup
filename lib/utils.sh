@@ -26,7 +26,7 @@ install_aur_packages() {
 symlink() {
   local original_dir=$1
   local sym_dir=$2
-  local name=3
+  local name=$3
 
   ln -s "$original_dir/$name" "$sym_dir/$name"
 }
