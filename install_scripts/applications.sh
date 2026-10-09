@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-source "$SCRIPT_DIR/lib/utils.sh"
-
 install_apps() {
   local application_list=(
     "firefox"

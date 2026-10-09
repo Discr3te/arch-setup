@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source "$SCRIPT_DIR/lib/utils.sh"
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 CONFIG_DIR="$HOME/.config"
 LOCAL_DIR="$HOME/.local"
