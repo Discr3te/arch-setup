@@ -8,11 +8,7 @@ install_yubico() {
     "yubikey-full-disk-encryption"
   )
 
-  # shellcheck disable=2034
-  local aur_package_list=("yubico-authenticator")
-
-  install_aur_packages aur_package_list
-
+  install_aur_packages yubico-authenticator
   install_pkg "${package_list[@]}"
 }
 

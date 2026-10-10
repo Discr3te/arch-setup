@@ -23,11 +23,7 @@ install_apps() {
     "unzip"
   )
 
-  # shellcheck disable=2034
-  local aur_application_list=("orca-slicer-bin")
-
-  install_aur_packages aur_application_list
-
+  install_aur_packages orca-slicer-bin
   install_pkg "${application_list[@]}"
 }
 

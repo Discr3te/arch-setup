@@ -5,8 +5,6 @@ install_pkg() {
 }
 
 install_aur_packages() {
-  local -n aur_packags_ref="$1"
-
   local yay_opts=(
     -Sy
     --noconfirm
@@ -20,7 +18,7 @@ install_aur_packages() {
     source "$SCRIPT_DIR/install_scripts/aur_helper.sh"
   fi
 
-  yay "${yay_opts[@]}" "${aur_packages_ref[@]}"
+  yay "${yay_opts[@]}" "$@"
 }
 
 symlink() {

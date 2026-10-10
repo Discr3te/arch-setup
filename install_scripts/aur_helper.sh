@@ -13,8 +13,6 @@ install_aur_helper() {
     pushd "$DOWNLOADS_DIR/yay" || exit
     makepkg -si --noconfirm
     popd || exit
-  else
-    echo "AUR helper (yay) already installed."
   fi
 }
 
