@@ -11,7 +11,7 @@ install_apps() {
     "mako"              # notification daemon
     "nautilus"          # file manager
     "fuzzel"            # application launcher
-    "cryptsetup "       # dependency: fuzzel (LUKS)
+    "cryptsetup"        # dependency: fuzzel (LUKS)
     "dosfstools"        # dependency: fuzzel (format FAT)
     "ntfs-3g"           # dependency: fuzzel (format ntfs)
     "ntfsprogs"         # dependency: fuzzel (format ntfs)
