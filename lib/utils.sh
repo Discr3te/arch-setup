@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 
 install_pkg() {
-  sudo pacman -Syu --needed --noconfirm "$@"
+  sudo pacman -S --needed --noconfirm "$@"
 }
 
 install_aur_packages() {
   local yay_opts=(
-    -Sy
+    -S
     --noconfirm
+    --needed
     --answerclean None
     --answerupgrade None
     --answerdiff None # Unsafe to set it to None. Change later
@@ -26,5 +27,12 @@ symlink() {
   local sym_dir=$2
   local name=$3
 
-  ln -s "$original_dir/$name" "$sym_dir/$name"
+  local backup_dir="$HOME/.config/backup"
+  mkdir -p "$backup_dir"
+
+  if [[ -d "$sym_dir/$name" ]] && [[ ! -L "$sym_dir/$name" ]]; then
+    mv "$sym_dir/$name" "$backup_dir/$name.$(date +%Y%m%d-%H%M%S)"
+  fi
+
+  ln -sfn "$original_dir/$name" "$sym_dir/$name"
 }

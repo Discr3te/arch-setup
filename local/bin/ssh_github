@@ -2,7 +2,7 @@
 
 key_type_auth=auth
 key_type_signing=signing
-ssh_config="$HOME"/.config/ssh
+ssh_config="$HOME"/.ssh
 
 create_keys() {
   local key_type=$1
@@ -25,7 +25,7 @@ create_keys() {
 write_allowed_signers() {
   local user_email
   local sign_key_file
-  user_email=$(git config user.email)z
+  user_email=$(git config user.email)
   sign_key_file="$ssh_config/id_ed25519_sk_git_$key_type_signing.pub"
 
   echo "$user_email namespaces=\"git\" $(cat "$sign_key_file")" >>"$ssh_config/allowed_signers"

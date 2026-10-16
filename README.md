@@ -13,5 +13,4 @@ Run this line on a fresh install:
 ```
 
 After the script finishes:
-* Remember to setup your yubikey and ssh credentials using the scripts in '~/.local/bin`. 
-* If your on a laptop remember to setup powertop and tlp for battery life.
+* Remember to setup your yubikey and ssh credentials using the scripts in '~/.local/bin'. 

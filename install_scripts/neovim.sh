@@ -13,7 +13,7 @@ install_neovim() {
     "git"
   )
 
-  install_pkg "${dependencies[@]}"
+  install_pkg neovim "${dependencies[@]}"
 }
 
 install_neovim

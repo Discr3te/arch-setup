@@ -22,5 +22,7 @@ install_hypr_ecosystem() {
 
 install_hypr_ecosystem
 
+systemctl --user enable hyprpolkitagent
+
 symlink "$DOTFILES_DIR" "$CONFIG_DIR" "hypr"
 symlink "$DOTFILES_DIR" "$CONFIG_DIR" "wallpapers"

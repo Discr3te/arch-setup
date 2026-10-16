@@ -23,7 +23,7 @@ install_waybar() {
     "gtk3"
     "libpulse"
     "libnl"
-    "libappindicator-gtk3"
+    "libappindicator"
     "libdbusmenu-gtk3"
     "libmpdclient"
     "sndio"
