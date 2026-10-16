@@ -7,6 +7,7 @@ install_audio() {
     "pipewire-alsa"
     "pipewire-pulse"
     "wiremix" # TUI
+    "rtkit"
   )
 
   install_pkg "${audio_packages[@]}"
