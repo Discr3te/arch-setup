@@ -51,5 +51,5 @@ else
   # hyprlock
   sudo sed -i '$ s/^/#/' /etc/pam.d/hyprlock
   sudo sed -i '3i\auth        required    pam_u2f.so cue' /etc/pam.d/hyprlock
-  sudo sed -i '3i\auth        required    pam_unix.so' /etc/pam.d/hyprlock
+  sudo sed -i '3i\auth        requisite   pam_unix.so' /etc/pam.d/hyprlock
 fi
