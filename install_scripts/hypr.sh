@@ -4,7 +4,6 @@ install_hypr_ecosystem() {
   local hypr_package_list=(
     "hyprland"
     "hyprlock"
-    "hyprpaper"
     "hypridle"
     "hyprpolkitagent"
     "xdg-desktop-portal-hyprland"
@@ -25,4 +24,3 @@ install_hypr_ecosystem
 systemctl --user enable hyprpolkitagent
 
 symlink "$DOTFILES_DIR" "$CONFIG_DIR" "hypr"
-symlink "$DOTFILES_DIR" "$CONFIG_DIR" "wallpapers"

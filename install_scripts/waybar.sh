@@ -52,4 +52,3 @@ install_waybar() {
 install_waybar
 
 symlink "$DOTFILES_DIR" "$CONFIG_DIR" "waybar"
-symlink "$DOTFILES_DIR" "$CONFIG_DIR" "wallpapers"
