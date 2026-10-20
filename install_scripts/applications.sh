@@ -9,17 +9,15 @@ install_apps() {
     "satty"             # screenshot
     "btop"              # resource monitoring
     "mako"              # notification daemon
-    "nautilus"          # file manager
     "fuzzel"            # application launcher
-    "cryptsetup"        # dependency: fuzzel (LUKS)
-    "dosfstools"        # dependency: fuzzel (format FAT)
-    "ntfs-3g"           # dependency: fuzzel (format ntfs)
-    "ntfsprogs"         # dependency: fuzzel (format ntfs)
+    "nautilus"          # file manager
+    "cryptsetup"        # dependency: nautilus (LUKS)
+    "dosfstools"        # dependency: nautilus (format FAT)
+    "ntfs-3g"           # dependency: nautilus (format ntfs)
     "gimp"              # photo editing software
     "libreoffice-still" # office suite
     "freecad"           # cad software
     "discord"
-    "spotify-launcher"
     "unzip"
   )
 
