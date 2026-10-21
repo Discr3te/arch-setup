@@ -18,6 +18,6 @@ for script in "$SCRIPT_DIR/install_scripts"/*; do
   [ -f "$script" ] && [ -x "$script" ] && source "$script"
 done
 
-symlink "$SCRIPT_DIR/local" "$LOCAL_DIR" "bin"
+symlink "$DOTFILES_DIR/local" "$LOCAL_DIR" "bin"
 
 # reboot
