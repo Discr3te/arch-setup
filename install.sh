@@ -12,12 +12,11 @@ git clone https://github.com/Discr3te/.dotfiles.git "$DOTFILES_DIR"
 
 mkdir -p "$CONFIG_DIR" "$LOCAL_DIR" "$DOWNLOADS_DIR"
 
-source "$SCRIPT_DIR/local/bin/update_mirrors"
-
 for script in "$SCRIPT_DIR/install_scripts"/*; do
-  [ -f "$script" ] && [ -x "$script" ] && source "$script"
+  if [[ -f "$script" ]] && [[ -x "$script" ]]; then
+    # shellcheck disable=SC1090
+    source "$script"
+  fi
 done
-
-symlink "$DOTFILES_DIR/local" "$LOCAL_DIR" "bin"
 
 # reboot

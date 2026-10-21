@@ -2,10 +2,11 @@
 
 install_waybar() {
   local runtime_dependencies=(
-    "grim"   # screenshot
-    "slurp"  # screenshot
-    "satty"  # screenshot
-    "fuzzel" # power menu
+    "grim"      # screenshot
+    "slurp"     # screenshot
+    "satty"     # screenshot
+    "fuzzel"    # power menu
+    "libnotify" # library to send notifications
   )
 
   local dependencies=(
