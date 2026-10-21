@@ -27,7 +27,7 @@ write_allowed_signers() {
   local signing_key
   user_email=$(git config user.email)
 
-  IFS= read -r signing_key < "$SSH_DIR/id_ed25519_sk_rk_git_$KT_SIGNING.pub"
+  IFS= read -r signing_key < "$SSH_DIR/id_ed25519_sk_git_$KT_SIGNING.pub"
 
   echo "$user_email namespaces=\"git\" $signing_key" >>"$SSH_DIR/allowed_signers"
 
@@ -35,7 +35,7 @@ write_allowed_signers() {
   mkdir -p "$SSH_DIR/config"
   cat > "$SSH_DIR/config" <<EOF
 Host github.com
-  IdentityFile ~/.ssh/id_ed25519_sk_rk_git_$KT_SIGNING
+  IdentityFile ~/.ssh/id_ed25519_sk_git_$KT_SIGNING
   IdentitiesOnly yes
 EOF
 
