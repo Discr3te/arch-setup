@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-key_type_auth=auth
-key_type_signing=signing
-ssh_config="$HOME"/.ssh
+KT_AUTH=auth
+KT_SIGNING=signing
+SSH_DIR="$HOME"/.ssh
 
 create_keys() {
   local key_type=$1
@@ -16,7 +16,7 @@ create_keys() {
     -O application=ssh:git_"$key_type"
     # -O user=discr3te
     -C "Git $key_type key $user_email"
-    -f "$ssh_config/id_ed25519_sk_git_$key_type"
+    -f "$SSH_DIR/id_ed25519_sk_git_$key_type"
   )
   echo "Creating git $key_type key"
   ssh-keygen "${keygen_opts[@]}"
@@ -24,11 +24,25 @@ create_keys() {
 
 write_allowed_signers() {
   local user_email
-  local sign_key_file
+  local signing_key
   user_email=$(git config user.email)
-  sign_key_file="$ssh_config/id_ed25519_sk_git_$key_type_signing.pub"
 
-  echo "$user_email namespaces=\"git\" $(cat "$sign_key_file")" >>"$ssh_config/allowed_signers"
+  IFS= read -r signing_key < "$SSH_DIR/id_ed25519_sk_rk_git_$KT_SIGNING.pub"
+
+  echo "$user_email namespaces=\"git\" $signing_key" >>"$SSH_DIR/allowed_signers"
+
+  printf "%s" "Creating config file for ssh"
+  mkdir -p "$SSH_DIR/config"
+  cat > "$SSH_DIR/config" <<EOF
+Host github.com
+  IdentityFile ~/.ssh/id_ed25519_sk_rk_git_$KT_SIGNING
+  IdentitiesOnly yes
+EOF
+
+mv "$SSH_DIR/id_ed25519_sk_rk_git_$KT_SIGNING.pub" "$SSH_DIR/id_ed25519_sk_git_$KT_SIGNING.pub" 
+mv "$SSH_DIR/id_ed25519_sk_rk_git_$KT_SIGNING" "$SSH_DIR/id_ed25519_sk_git_$KT_SIGNING"
+mv "$SSH_DIR/id_ed25519_sk_rk_git_$KT_SIGNING.pub" "$SSH_DIR/id_ed25519_sk_git_$KT_AUTH.pub"
+mv "$SSH_DIR/id_ed25519_sk_rk_git_$KT_AUTH" "$SSH_DIR/id_ed25519_sk_git_$KT_AUTH"
 }
 
 select_choice() {
@@ -57,10 +71,10 @@ select_choice() {
         "Create a new git authentication key")
           # read -rp "Please enter the username for this account: " username
           clear
-          create_keys $key_type_auth
+          create_keys $KT_AUTH
           clear
-          printf "%s\n" "Copy this $key_type_auth key into your Git-based platform:"
-          cat "$ssh_config/id_ed25519_sk_git_$key_type_auth.pub"
+          printf "%s\n" "Copy this $KT_AUTH key into your Git-based platform:"
+          cat "$SSH_DIR/id_ed25519_sk_git_$KT_AUTH.pub"
           echo ""
           read -rp "Press ENTER to continue"
           select_choice
@@ -68,11 +82,11 @@ select_choice() {
         "Creat a new git signing key")
           # read -rp "Please enter the username for this account: " username
           clear
-          create_keys $key_type_signing
+          create_keys $KT_SIGNING
           write_allowed_signers
           clear
-          printf "%s\n" "Copy this $key_type_signing key into your Git-based platform:"
-          cat "$ssh_config/id_ed25519_sk_git_$key_type_signing.pub"
+          printf "%s\n" "Copy this $KT_SIGNING key into your Git-based platform:"
+          cat "$SSH_DIR/id_ed25519_sk_git_$KT_SIGNING.pub"
           echo ""
           read -rp "Press ENTER to continue"
           select_choice
@@ -80,17 +94,17 @@ select_choice() {
         "Create both a new git signing key and authentication key")
           # read -rp "Please enter the username for this account: " username
           clear
-          create_keys $key_type_auth
+          create_keys $KT_AUTH
           echo ""
           clear
-          create_keys $key_type_signing
+          create_keys $KT_SIGNING
           write_allowed_signers
           clear
-          printf "%s\n" "Copy this $key_type_auth key into your Git-based platform:"
-          cat "$ssh_config/id_ed25519_sk_git_$key_type_auth.pub"
+          printf "%s\n" "Copy this $KT_AUTH key into your Git-based platform:"
+          cat "$SSH_DIR/id_ed25519_sk_git_$KT_AUTH.pub"
           echo ""
-          printf "%s\n" "Copy this $key_type_signing key into your Git-based platform:"
-          cat "$ssh_config/id_ed25519_sk_git_$key_type_signing.pub"
+          printf "%s\n" "Copy this $KT_SIGNING key into your Git-based platform:"
+          cat "$SSH_DIR/id_ed25519_sk_git_$KT_SIGNING.pub"
           echo ""
           read -rp "Press ENTER to continue"
           select_choice
@@ -98,7 +112,7 @@ select_choice() {
         "Go Back")
           select_choice
           ;;
-        Quit)
+        "Quit")
           exit
           ;;
         *)
@@ -108,12 +122,12 @@ select_choice() {
       done
       ;;
     "Download existing keys from your hardware key")
-      pushd "$ssh_config" || exit
+      pushd "$SSH_DIR" || exit
       ssh-keygen -K
       write_allowed_signers
       popd || exit
       clear
-      printf "%s\n" "Your existing keys have successfully been downloaded to: $ssh_config."
+      printf "%s\n" "Your existing keys have successfully been downloaded to: $SSH_DIR."
       read -rp "Press ENTER to continue"
       select_choice
       ;;
@@ -128,5 +142,5 @@ select_choice() {
 }
 
 sudo pacman -Syu --noconfirm --needed git openssh
-mkdir -p "$ssh_config"
+mkdir -p "$SSH_DIR"
 select_choice
