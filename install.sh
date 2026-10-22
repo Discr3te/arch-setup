@@ -2,7 +2,6 @@
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 CONFIG_DIR="$HOME/.config"
-LOCAL_DIR="$HOME/.local"
 DOTFILES_DIR="$HOME/.dotfiles"
 DOWNLOADS_DIR="$HOME/Downloads"
 
