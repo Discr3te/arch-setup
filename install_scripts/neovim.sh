@@ -11,6 +11,7 @@ install_neovim() {
     "tar"
     "bash"
     "git"
+    "luarocks"
   )
 
   install_pkg neovim "${dependencies[@]}"
